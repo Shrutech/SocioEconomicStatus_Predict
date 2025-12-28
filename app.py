@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
 
+
+BASE_DIR = os.path.dirname(__file__)
 st.title("Socio-Economic Status Prediction")
 st.write("Enter normalized feature values (0 to 1):")
 
