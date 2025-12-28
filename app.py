@@ -3,8 +3,8 @@ import pandas as pd
 import pickle
 import os
 
-
 BASE_DIR = os.path.dirname(__file__)
+
 st.title("Socio-Economic Status Prediction")
 st.write("Enter normalized feature values (0 to 1):")
 
@@ -15,9 +15,15 @@ Deprivation = st.number_input("Total Deprivation (Normalized)", 0.0, 1.0, 0.32)
 TechAccess = st.number_input("Technology Access (Normalized)", 0.0, 1.0, 0.55)
 SCST = st.number_input("SC/ST Population (Normalized)", 0.0, 1.0, 0.30)
 
-# Load model and encoder
-model = pickle.load(open("stack_model.pkl", "rb"))
-le = pickle.load(open("label_encoder.pkl", "rb"))
+# Load model and encoder using BASE_DIR
+model_path = os.path.join(BASE_DIR, "stack_model.pkl")
+le_path = os.path.join(BASE_DIR, "label_encoder.pkl")
+
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
+
+with open(le_path, "rb") as f:
+    le = pickle.load(f)
 
 if st.button("Predict SES"):
 
@@ -40,4 +46,3 @@ if st.button("Predict SES"):
     predicted_label = le.inverse_transform(prediction)[0]
 
     st.success(f"Predicted Socio-Economic Status: {predicted_label}")
-
