@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
+from sklearn.ensemble import RandomForestClassifier, StackingClassifier
+from sklearn.preprocessing import LabelEncoder
+
 
 BASE_DIR = os.path.dirname(__file__)
 
